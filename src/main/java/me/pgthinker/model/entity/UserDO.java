@@ -23,12 +23,9 @@ import java.util.Date;
 public class UserDO implements Serializable {
 
     @TableId(type = IdType.AUTO)
-    private String id;
+    private Long id;
     private String username;
     private String password;
-
-    @Getter
-    private String role;
     private String profilePicture;
     private Date createTime;
 
