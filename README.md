@@ -1,0 +1,1 @@
+- Swagger-UI: [localhost:8088/api/swagger-ui/index.html](http://localhost:8088/api/swagger-ui/index.html)

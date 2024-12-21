@@ -1,20 +1,25 @@
 package me.pgthinker.aop;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import me.pgthinker.annotation.AuthCheck;
 import me.pgthinker.common.ErrorCode;
 import me.pgthinker.exception.BusinessException;
 import me.pgthinker.model.entity.UserDO;
+import me.pgthinker.model.entity.UserRoleDO;
 import me.pgthinker.model.enums.UserRoleEnum;
 import me.pgthinker.service.UserService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import java.util.List;
 
 /**
  * @Project: me.pgthinker.aop
@@ -49,19 +54,20 @@ public class AuthInterceptor {
         if (mustRoleEnum == null) {
             return joinPoint.proceed();
         }
+        // 获取权限
+        List<UserRoleEnum> roles = userService.userRoles(loginUser.getId());
         // 必须有该权限才通过
-        UserRoleEnum userRoleEnum = UserRoleEnum.getEnumByValue(loginUser.getRole());
-        if (userRoleEnum == null) {
+        if (CollectionUtils.isEmpty(roles)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
         // 如果被封号，直接拒绝
-        if (UserRoleEnum.BAN.equals(userRoleEnum)) {
+        if (roles.contains(UserRoleEnum.BAN)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
         // 必须有管理员权限
         if (UserRoleEnum.ADMIN.equals(mustRoleEnum)) {
             // 用户没有管理员权限，拒绝
-            if (!UserRoleEnum.ADMIN.equals(userRoleEnum)) {
+            if(!roles.contains(UserRoleEnum.ADMIN)) {
                 throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
             }
         }

@@ -2,6 +2,7 @@ package me.pgthinker.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import me.pgthinker.model.vo.AuthVO;
+import me.pgthinker.model.vo.UserRes;
 
 /**
  * @Project: me.pgthinker.service
@@ -16,7 +17,7 @@ public interface AuthService {
      * @param authVO
      * @return
      */
-    Long login(AuthVO authVO, HttpServletRequest request);
+    UserRes login(AuthVO authVO, HttpServletRequest request);
 
     /**
      * 注册
