@@ -1,19 +1,24 @@
 package me.pgthinker.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import me.pgthinker.common.BaseResponse;
 import me.pgthinker.common.Constants;
 import me.pgthinker.common.ErrorCode;
+import me.pgthinker.common.ResultUtils;
 import me.pgthinker.exception.BusinessException;
 import me.pgthinker.mapper.UserMapper;
 import me.pgthinker.model.entity.UserDO;
 import me.pgthinker.model.vo.BaseDelete;
 import me.pgthinker.service.UserService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+
+import java.util.Collections;
 
 /**
  * @Project: me.pgthinker.service.impl
@@ -30,23 +35,36 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Long delete(BaseDelete baseDelete) {
+    public BaseResponse delete(BaseDelete baseDelete) {
         if(CollectionUtils.isEmpty(baseDelete.getIds())){
-            return -1L;
+            return ResultUtils.error(ErrorCode.NOT_FOUND_ERROR);
         }
         userMapper.deleteBatchIds(baseDelete.getIds());
-        return 0L;
+        return ResultUtils.success("删除成功");
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Long update() {
-        return 0L;
+    public BaseResponse update(UserDO userDO) {
+        if (userDO.getId() == null) {
+            return ResultUtils.error(ErrorCode.NOT_FOUND_ERROR);
+        }
+        UserDO user = userMapper.selectById(userDO.getId());
+        if (user == null) {
+            return ResultUtils.error(ErrorCode.NOT_FOUND_ERROR);
+        }
+        user.setUsername(userDO.getUsername());
+        user.setPassword(userDO.getPassword());
+        user.setProfilePicture(userDO.getProfilePicture());
+        userMapper.updateById(user);
+        return ResultUtils.success("修改成功");
     }
 
     @Override
     public Pageable listOfPage(Pageable pageable) {
-        return null;
+        Page<UserDO> page = new Page<>(pageable.getPageNumber(),pageable.getPageSize());
+
+        return (Pageable) userMapper.selectPage(page,null);
     }
 
 
