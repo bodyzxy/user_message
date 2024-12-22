@@ -2,12 +2,12 @@ package me.pgthinker.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import me.pgthinker.common.BaseResponse;
 import me.pgthinker.common.Constants;
 import me.pgthinker.common.ErrorCode;
-import me.pgthinker.common.ResultUtils;
 import me.pgthinker.exception.BusinessException;
 import me.pgthinker.mapper.RoleMapper;
 import me.pgthinker.mapper.UserMapper;
@@ -17,16 +17,14 @@ import me.pgthinker.model.entity.UserDO;
 import me.pgthinker.model.entity.UserRoleDO;
 import me.pgthinker.model.enums.UserRoleEnum;
 import me.pgthinker.model.vo.BaseDelete;
+import me.pgthinker.model.vo.UserReq;
 import me.pgthinker.service.UserService;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -65,10 +63,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Pageable listOfPage(Pageable pageable) {
-        Page<UserDO> page = new Page<>(pageable.getPageNumber(),pageable.getPageSize());
-
-        return (Pageable) userMapper.selectPage(page,null);
+    public IPage<UserDO> listOfPage(UserReq userReq) {
+        Page<UserDO> userDOPage = new Page<>(userReq.getPage(), userReq.getPageSize());
+        return userMapper.selectPage(userDOPage,null);
     }
 
     @Override
