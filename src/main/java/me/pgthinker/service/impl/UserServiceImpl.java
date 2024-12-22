@@ -19,9 +19,11 @@ import me.pgthinker.model.enums.UserRoleEnum;
 import me.pgthinker.model.vo.BaseDelete;
 import me.pgthinker.model.vo.UserReq;
 import me.pgthinker.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.DigestUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -55,9 +57,12 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-        user.setUsername(userDO.getUsername());
-        user.setPassword(userDO.getPassword());
-        user.setProfilePicture(userDO.getProfilePicture());
+        if(StringUtils.isNotEmpty(userDO.getPassword())){
+            user.setPassword(DigestUtils.md5DigestAsHex(userDO.getPassword().getBytes()));
+        }
+        if(StringUtils.isNotEmpty(userDO.getProfilePicture())){
+            user.setProfilePicture(userDO.getProfilePicture());
+        }
         userMapper.updateById(user);
         return userDO.getId();
     }
@@ -65,7 +70,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public IPage<UserDO> listOfPage(UserReq userReq) {
         Page<UserDO> userDOPage = new Page<>(userReq.getPage(), userReq.getPageSize());
-        return userMapper.selectPage(userDOPage,null);
+        LambdaQueryWrapper<UserDO> qw = new LambdaQueryWrapper<>();
+        return userMapper.selectPage(userDOPage,qw);
     }
 
     @Override
