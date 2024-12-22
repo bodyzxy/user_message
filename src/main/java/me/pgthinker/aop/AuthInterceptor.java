@@ -21,13 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.List;
 
-/**
- * @Project: me.pgthinker.aop
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/12/21 10:43
- * @Description:
- */
+
 @Aspect
 @Component
 public class AuthInterceptor {

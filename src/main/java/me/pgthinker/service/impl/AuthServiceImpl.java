@@ -21,13 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StreamUtils;
 
-/**
- * @Project: me.pgthinker.service.impl
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/12/21 10:48
- * @Description:
- */
+
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {

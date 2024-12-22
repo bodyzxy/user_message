@@ -1,12 +1,6 @@
 package me.pgthinker.common;
 
-/**
- * @Project: me.pgthinker.common
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/11/25 01:22
- * @Description:
- */
+
 public class ResultUtils {
     /**
      * 成功

@@ -13,13 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @Project: me.pgthinker.controller
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/12/21 18:49
- * @Description:
- */
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor

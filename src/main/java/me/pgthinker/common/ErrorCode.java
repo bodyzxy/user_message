@@ -1,12 +1,6 @@
 package me.pgthinker.common;
 
-/**
- * @Project: me.pgthinker.common
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/11/25 01:23
- * @Description:
- */
+
 public enum ErrorCode {
     SUCCESS(0, "ok"),
     PARAMS_ERROR(40000, "请求参数错误"),

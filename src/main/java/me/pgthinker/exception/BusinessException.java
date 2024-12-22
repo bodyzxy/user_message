@@ -2,13 +2,7 @@ package me.pgthinker.exception;
 
 import me.pgthinker.common.ErrorCode;
 
-/**
- * @Project: me.pgthinker.exception
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/11/25 01:20
- * @Description:
- */
+
 public class BusinessException extends RuntimeException{
 
     /**

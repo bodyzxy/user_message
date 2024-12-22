@@ -7,13 +7,7 @@ import me.pgthinker.common.ResultUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-/**
- * @Project: me.pgthinker.exception
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/11/25 01:20
- * @Description:
- */
+
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {

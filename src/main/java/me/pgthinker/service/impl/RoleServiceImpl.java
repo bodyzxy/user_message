@@ -9,13 +9,7 @@ import me.pgthinker.service.RoleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @Project: me.pgthinker.service.impl
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/12/21 23:50
- * @Description:
- */
+
 @Service
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {

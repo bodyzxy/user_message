@@ -28,13 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @Project: me.pgthinker.service.impl
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/12/21 10:48
- * @Description:
- */
+
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {

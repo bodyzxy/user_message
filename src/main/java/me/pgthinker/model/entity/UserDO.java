@@ -11,13 +11,7 @@ import lombok.Getter;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @Project: me.pgthinker.model.entity
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/12/21 09:52
- * @Description:
- */
+
 @TableName("user_info")
 @Data
 public class UserDO implements Serializable {

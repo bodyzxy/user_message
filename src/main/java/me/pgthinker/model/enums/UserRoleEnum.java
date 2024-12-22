@@ -6,13 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @Project: me.pgthinker.model.enums
- * @Author: NingNing0111
- * @Github: https://github.com/ningning0111
- * @Date: 2024/12/21 10:46
- * @Description:
- */
+
 public enum UserRoleEnum {
 
     USER("用户", "user"),
